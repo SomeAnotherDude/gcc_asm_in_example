@@ -31,8 +31,8 @@ asm("mov %eax, %ebx;\
 // but this is possible to swich to intel
 
 // either by inserting a special directive
-asm(".intel_syntax;"
-	"mov eax, ebx;\
+asm(".intel_syntax;\"
+	 mov eax, ebx;\
 	 mov ebx, 1");
 
 // or by passing a "-masm=intel" flag to gcc 
