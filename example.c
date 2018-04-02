@@ -15,16 +15,16 @@ asm("mov $0, %edx ; I am the comment inside asm code");
 // all the lines (except the last line) must end with '\n' symbol
 // (gcc guide says it should be "\n\t" but it's OK to omit tabulation)
 asm("mov $1, %al\n"
-	"mov $2, %ah");
+    "mov $2, %ah");
 
 // ending with ';' also works (why?)
 asm("mov $1, %al;"
-	"mov $2, %ah");
+    "mov $2, %ah");
 
 // if you don't like a lot of '"' (double-quotes)
 // you can replace it with a lot of '\' (backslash)
 asm("mov %eax, %ebx;\
-	 mov %ebx, %ecx");
+     mov %ebx, %ecx");
 
 
 // all the asm uses AT&T synax by default, 
@@ -32,8 +32,8 @@ asm("mov %eax, %ebx;\
 
 // either by inserting a special directive
 asm(".intel_syntax;\"
-	 mov eax, ebx;\
-	 mov ebx, 1");
+     mov eax, ebx;\
+     mov ebx, 1");
 
 // or by passing a "-masm=intel" flag to gcc 
 $ gcc ./example.c -masm=intel
@@ -53,8 +53,8 @@ int in = 0;
 int out;
 
 asm("inc %%eax;\
-	 mov %%eax, %%ebx"
-	: "=b"(out) : "a"(in) );
+     mov %%eax, %%ebx"
+    : "=b"(out) : "a"(in) );
 
 printf("%d\n", out); // prints "1"
 
@@ -100,11 +100,11 @@ int a = 1;
 int c;
 
 asm("mov edx %1;\
-	 add edx, %2;\
-	 mov edx %0"
-	: "=r"(c) // "c" variable can be placed in any register and will be rewritten by the asm 
-	: "r"(a), "r"(2) // input may be an expression 
-	: "edx" ); // this code rewrites "edx" register so we mention it in CLOBBERS list 
+     add edx, %2;\
+     mov edx %0"
+    : "=r"(c) // "c" variable can be placed in any register and will be rewritten by the asm 
+    : "r"(a), "r"(2) // input may be an expression 
+    : "edx" ); // this code rewrites "edx" register so we mention it in CLOBBERS list 
 
 
 // %0 .. %2 means "values in order of apperance from output to input, from left to right"
@@ -113,7 +113,7 @@ asm("..." : "=r"(a), "=r"(b) : "r"(c), "r"(d))
 
 // a variable might be input and output same time
 asm("add %0, %2" 
-	: "=r"(a) // %0
-	: "0"(a),  // explicitly set %0 to a but %1 = a anyway
-	  "r"(b) );	
+    : "=r"(a) // %0
+    : "0"(a),  // explicitly set %0 to a but %1 = a anyway
+      "r"(b) ); 
 
